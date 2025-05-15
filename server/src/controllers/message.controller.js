@@ -55,3 +55,18 @@ export const sendMessage = async (req,res)=>{
         res.status(500).json({error : "internal server error"})
     }
 }
+export const deleteMultipleMessages = async (req, res) => {
+  try {
+    const { messageIds } = req.body;
+    if (!Array.isArray(messageIds)) {
+      return res.status(400).json({ message: "Invalid messageIds" });
+    }
+
+    await Message.deleteMany({ _id: { $in: messageIds } });
+
+    res.status(200).json({ message: "Messages deleted successfully" });
+  } catch (err) {
+    console.error("Delete messages error:", err);
+    res.status(500).json({ message: "Failed to delete messages" });
+  }
+};

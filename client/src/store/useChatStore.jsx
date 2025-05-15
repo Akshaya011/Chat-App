@@ -9,6 +9,7 @@ export const useChatStore = create((set, get) => ({
   selectedUser: null,
   isUsersLoading: false,
   isMessagesLoading: false,
+  selectedMessages: [],
 
   getUsers: async () => {
     const { authUser } = useAuthStore.getState();
@@ -75,11 +76,37 @@ export const useChatStore = create((set, get) => ({
       }));
     });
   },
-
   unsubscribeFromMessage: () => {
     const { socket } = useAuthStore.getState();
     socket.off("newMessage");
   },
   //  needs optimization
   setSelectedUser: (selectedUser) => set({ selectedUser }),
+  selectMessages: (id) => {
+    const { selectedMessages } = get();
+    if (selectedMessages.includes(id))
+      set({
+        selectedMessages: selectedMessages.filter((msgId) => msgId != id),
+      });
+    else set({ selectedMessages: [...selectedMessages, id] });
+  },
+  handleDeleteSelected: async () => {
+    const {selectedMessages} = get()
+    try {
+      await axiosInstance.post("/messages/delete-multiple", {
+        messageIds: selectedMessages,
+      });
+      // Remove deleted messages from state
+      set((state) => ({
+        messages: state.messages.filter(
+          (msg) => !state.selectedMessages.includes(msg._id)
+        ),
+        selectedMessages: [], // optional: clear selection
+      }));
+      toast.success("Messages deleted successfully");
+    } catch (error) {
+      console.error("Delete Error:", error);
+      toast.error("Failed to delete messages");
+    }
+  },
 }));

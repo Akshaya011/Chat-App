@@ -17,6 +17,8 @@ const ChatContainer = () => {
     selectedUser,
     subscribeToMessage,
     unsubscribeFromMessage,
+    selectedMessages,
+    selectMessages,
   } = useChatStore();
   const messageEndRef = useRef(null)
   const { authUser } = useAuthStore();
@@ -27,8 +29,11 @@ const ChatContainer = () => {
   }, [selectedUser._id, getMessages]);
   useEffect(()=>{
     if(messageEndRef.current && messages)
-      messageEndRef.current.scrollIntoView({behavior:"smooth"})
+      messageEndRef.current.scrollIntoView({behavior:"auto"})
   })
+  const handleDoubleClickMsg=(id)=>{
+    selectMessages(id);
+  }
   if (isMessagesLoading)
     return (
       <div className="w-full flex flex-col overflow-auto">
@@ -67,7 +72,7 @@ const ChatContainer = () => {
                   {formatMessageTime(message.createdAt)}
                 </time>
               </div>
-              <div className="chat-bubble">
+              <div className={`chat-bubble ${selectedMessages.includes(message._id)?"bg-green-300":""}`} onDoubleClick={()=>handleDoubleClickMsg(message._id)}>
                 {message.image && (
                   <img
                     src={message.image}
