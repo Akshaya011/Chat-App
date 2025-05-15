@@ -10,11 +10,12 @@ import { useAuthStore } from "./store/useAuthStore";
 import { LuLoaderCircle } from "react-icons/lu";
 import { Toaster } from "react-hot-toast";
 import { useThemeStore } from "./store/usThemeStore";
+import MainLayout from "./layout/MainLayout";
 
 const App = () => {
   const { authUser, checkAuth, isCheckingAuth, onlineUsers } = useAuthStore();
   const { theme } = useThemeStore();
-  console.log({ onlineUsers });
+  // console.log({ onlineUsers });
   useEffect(() => {
     useAuthStore.getState().checkAuth();
   }, []);
@@ -46,28 +47,33 @@ const App = () => {
           },
         }}
       />
-      <Navbar />
-      <div className="">
-        <Routes>
+      <Routes>
+        {/* Public Routes */}
+        <Route
+          path="/login"
+          element={!authUser ? <LoginPage /> : <Navigate to="/" />}
+        />
+        <Route
+          path="/signup"
+          element={!authUser ? <SignUpPage /> : <Navigate to="/" />}
+        />
+
+        {/* Protected Routes with Layout */}
+        <Route element={<MainLayout />}>
           <Route
             path="/"
             element={authUser ? <HomePage /> : <Navigate to="/login" />}
           />
           <Route
-            path="/signup"
-            element={!authUser ? <SignUpPage /> : <Navigate to="/" />}
-          />
-          <Route
-            path="/login"
-            element={!authUser ? <LoginPage /> : <Navigate to="/" />}
-          />
-          <Route path="/settings" element={<SettingsPage />} />
-          <Route
             path="/profile"
             element={authUser ? <ProfilePage /> : <Navigate to="/login" />}
           />
-        </Routes>
-      </div>
+          <Route
+            path="/settings"
+            element={authUser ? <SettingsPage /> : <Navigate to="/login" />}
+          />
+        </Route>
+      </Routes>
     </div>
   );
 };

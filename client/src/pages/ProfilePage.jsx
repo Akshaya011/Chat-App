@@ -24,8 +24,9 @@ const ProfilePage = () => {
   };
   }
   return (
-    <div className="max-w-3xl mx-auto m-auto p-4  items-center">
-      <h1 className="text-3xl font-semibold mb-6 text-center">Profile</h1>
+    <div className="min-h-screen w-full pt-20">
+      <div className=" max-w-3xl mx-auto p-4 ">
+      <h1 className="text-3xl font-semibold mb-10 ">Profile</h1>
 
       <div className="flex flex-col items-center gap-4 mb-8">
         <div className="relative">
@@ -59,7 +60,7 @@ const ProfilePage = () => {
         </div>
       </div>
 
-      <div className="bg-gray-700 rounded-lg p-6 shadow">
+      <div className="bg-base-300 rounded-lg p-6 shadow-lg">
         <h3 className="text-lg font-semibold mb-4">Account Information:</h3>
         <div className="flex flex-col gap-2">
           <p>
@@ -72,6 +73,7 @@ const ProfilePage = () => {
           </p>
         </div>
       </div>
+    </div>
     </div>
   );
 };

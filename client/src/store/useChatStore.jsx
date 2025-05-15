@@ -50,29 +50,35 @@ export const useChatStore = create((set, get) => ({
       return toast.error("Missing auth or selected user");
     }
     try {
-      const res = await axiosInstance.post(`/messages/send/${selectedUser._id}`,messageData);
+      const res = await axiosInstance.post(
+        `/messages/send/${selectedUser._id}`,
+        messageData
+      );
       set({ messages: [...messages, res.data] });
     } catch (error) {
       toast.error("Failed to send message");
       console.error("sendMessages:", error);
     }
   },
-  subscribeToMessage:()=>{
-    const {selectedUser} = get()
-    if(!selectedUser)return ;
-    const {socket} = useAuthStore.getState()
-    // todo: optimize it latter
-    socket.on("newMessage)",(newMessage)=>{
-      const ismessageSentFromSelecteduser = selectedUser._id=== newMessage.senderId;
-      if(!ismessageSentFromSelecteduser)return;
-      set({
-        messages:[...state.messages,newMessage],
-      })
-    })
+  subscribeToMessage: () => {
+    const { selectedUser } = get();
+    if (!selectedUser) return;
+
+    const { socket } = useAuthStore.getState();
+    socket.on("newMessage", (newMessage) => {
+      const isMessageFromSelectedUser =
+        selectedUser._id === newMessage.senderId;
+      if (!isMessageFromSelectedUser) return;
+
+      set((state) => ({
+        messages: [...state.messages, newMessage],
+      }));
+    });
   },
-  unsubscribeFromMessage:()=>{
-    const {socket} = useAuthStore.getState()
-    socket.off("newMessage")
+
+  unsubscribeFromMessage: () => {
+    const { socket } = useAuthStore.getState();
+    socket.off("newMessage");
   },
   //  needs optimization
   setSelectedUser: (selectedUser) => set({ selectedUser }),
