@@ -1,0 +1,90 @@
+# dependencies
+/node_modules
+
+# production build
+/dist
+/build
+
+# system files
+.DS_Store
+Thumbs.db
+
+# env files
+.env
+.env.*.local
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# IDEs
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# optional: OS trash
+.trash/
+
+# Optional: Mac system files
+*.DS_Store
+
+# test coverage
+coverage/
+
+# eslint cache
+.eslintcache
+
+# vite
+*.log
+.cache/
+.vite/
+# dependencies
+/node_modules
+
+# production build
+/dist
+/build
+
+# system files
+.DS_Store
+Thumbs.db
+
+# env files
+.env
+.env.*.local
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# IDEs
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# optional: OS trash
+.trash/
+
+# Optional: Mac system files
+*.DS_Store
+
+# test coverage
+coverage/
+
+# eslint cache
+.eslintcache
+
+# vite
+*.log
+.cache/
+.vite/
