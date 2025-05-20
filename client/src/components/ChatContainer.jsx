@@ -52,7 +52,7 @@ const ChatContainer = () => {
               key={message._id}
               ref={messageEndRef}
               className={`chat ${
-                message.senderId == authUser._id ? "chat-end" : "chat-start"
+                message.senderId == authUser._id ? "chat-end bg-primary text-primary-content" : "chat-start"
               }`}
             >
               <div className="chat-image avatar">
