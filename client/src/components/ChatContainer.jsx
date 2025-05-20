@@ -72,7 +72,7 @@ const ChatContainer = () => {
                   {formatMessageTime(message.createdAt)}
                 </time>
               </div>
-              <div className={`chat-bubble ${message.senderId == authUser._id?"bg-primary text-primary-content":""} ${selectedMessages.includes(message._id)?"bg-green-300":""}`} onDoubleClick={()=>handleDoubleClickMsg(message._id)}>
+              <div className={`chat-bubble ${message.senderId == authUser._id?"bg-primary/50 text-primary-content":""} ${selectedMessages.includes(message._id)?"bg-green-300":""}`} onDoubleClick={()=>handleDoubleClickMsg(message._id)}>
                 {message.image && (
                   <img
                     src={message.image}
