@@ -10,6 +10,10 @@ import { app,server } from "./lib/socket.js"
 
 connectDb()
 dotenv.config()
+app.get("/", (req, res) => {
+  res.send("✅ Chat App Backend is running!");
+});
+
 const PORT = process.env.PORT||5001;
 
 app.use(cors({
