@@ -7,7 +7,7 @@ import { useAuthStore } from "../store/useAuthStore";
 import { formatMessageTime } from "../lib/utils";
 import avatar from "../constants/avatar.jpg";
 import avatar2 from "../constants/avatar2.jpg";
-import ChatHeader from "./Chatheader";
+import ChatHeader from "./ChatHeader";
 
 const ChatContainer = () => {
   const {
