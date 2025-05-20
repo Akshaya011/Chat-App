@@ -74,12 +74,12 @@ const ChatContainer = () => {
               </div>
               <div
                 className={`chat-bubble ${
-                  selectedMessages.includes(message._id) ? "bg-green-300" : ""
-                } ${
-                  message.senderId == authUser._id
+                  selectedMessages.includes(message._id)
+                    ? "bg-green-300 text-black"
+                    : message.senderId == authUser._id
                     ? "bg-primary text-primary-content"
                     : ""
-                } `}
+                }`}
                 onDoubleClick={() => handleDoubleClickMsg(message._id)}
               >
                 {message.image && (
