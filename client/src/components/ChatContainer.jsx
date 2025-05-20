@@ -52,7 +52,7 @@ const ChatContainer = () => {
               key={message._id}
               ref={messageEndRef}
               className={`chat ${
-                message.senderId == authUser._id ? "chat-end bg-primary text-primary-content" : "chat-start"
+                message.senderId == authUser._id ? "chat-end" : "chat-start"
               }`}
             >
               <div className="chat-image avatar">
@@ -72,7 +72,7 @@ const ChatContainer = () => {
                   {formatMessageTime(message.createdAt)}
                 </time>
               </div>
-              <div className={`chat-bubble ${selectedMessages.includes(message._id)?"bg-green-300":""}`} onDoubleClick={()=>handleDoubleClickMsg(message._id)}>
+              <div className={`chat-bubble ${message.senderId == authUser._id?"bg-primary text-base-content/78":""} ${selectedMessages.includes(message._id)?"bg-green-300":""}`} onDoubleClick={()=>handleDoubleClickMsg(message._id)}>
                 {message.image && (
                   <img
                     src={message.image}
