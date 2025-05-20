@@ -20,20 +20,20 @@ const ChatContainer = () => {
     selectedMessages,
     selectMessages,
   } = useChatStore();
-  const messageEndRef = useRef(null)
+  const messageEndRef = useRef(null);
   const { authUser } = useAuthStore();
   useEffect(() => {
     getMessages(selectedUser._id);
     subscribeToMessage();
     return () => unsubscribeFromMessage();
   }, [selectedUser._id, getMessages]);
-  useEffect(()=>{
-    if(messageEndRef.current && messages)
-      messageEndRef.current.scrollIntoView({behavior:"auto"})
-  })
-  const handleDoubleClickMsg=(id)=>{
+  useEffect(() => {
+    if (messageEndRef.current && messages)
+      messageEndRef.current.scrollIntoView({ behavior: "auto" });
+  });
+  const handleDoubleClickMsg = (id) => {
     selectMessages(id);
-  }
+  };
   if (isMessagesLoading)
     return (
       <div className="w-full flex flex-col overflow-auto">
@@ -72,7 +72,16 @@ const ChatContainer = () => {
                   {formatMessageTime(message.createdAt)}
                 </time>
               </div>
-              <div className={`chat-bubble ${message.senderId == authUser._id?"bg-primary/50 text-primary-content":""} ${selectedMessages.includes(message._id)?"bg-green-300":""}`} onDoubleClick={()=>handleDoubleClickMsg(message._id)}>
+              <div
+                className={`chat-bubble ${
+                  selectedMessages.includes(message._id) ? "bg-green-300" : ""
+                } ${
+                  message.senderId == authUser._id
+                    ? "bg-primary text-primary-content"
+                    : ""
+                } `}
+                onDoubleClick={() => handleDoubleClickMsg(message._id)}
+              >
                 {message.image && (
                   <img
                     src={message.image}
