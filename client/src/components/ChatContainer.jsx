@@ -1,13 +1,13 @@
 import React, { useRef } from "react";
 import { useChatStore } from "../store/useChatStore";
 import { useEffect } from "react";
-import ChatHeader from "./Chatheader";
 import MessageInput from "./messageInput";
 import MessageSkeleton from "./skeleton/MessageSkeleton";
 import { useAuthStore } from "../store/useAuthStore";
 import { formatMessageTime } from "../lib/utils";
 import avatar from "../constants/avatar.jpg";
 import avatar2 from "../constants/avatar2.jpg";
+import ChatHeader from "./Chatheader";
 
 const ChatContainer = () => {
   const {
