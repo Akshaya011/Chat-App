@@ -17,7 +17,7 @@ app.get("/", (req, res) => {
 const PORT = process.env.PORT||5001;
 
 app.use(cors({
-    origin: ["https://chatapp-orpin-tau.vercel.app/"],
+    origin: ["https://chatapp-orpin-tau.vercel.app"],
     credentials: true,
   }));
 app.use(express.json({ limit: '10mb' }));
