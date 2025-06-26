@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import { useAuthStore } from "../store/useAuthStore";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 export default function Login() {
   const [formData, setformData] = useState({
     username: "",
     password: "",
   });
+  const navigate = useNavigate()
   const { login } = useAuthStore();
   const handleSubmit = (e) => {
     e.preventDefault();
     // For now, just log the username and password
     console.log("Login attempt:", { formData });
     login(formData);
+    navigate("/");
   };
   return (
     // bg-gradient-to-r from-primary to-primary/0

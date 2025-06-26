@@ -4,7 +4,7 @@ import { FiMessageSquare } from "react-icons/fi";
 import { CiUser } from "react-icons/ci";
 import { MdOutlineMail } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { LuLoaderCircle } from "react-icons/lu";
 
@@ -14,6 +14,7 @@ const SignUpPage = () => {
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const { signUp, isSigningUp } = useAuthStore();
 
@@ -36,7 +37,10 @@ const SignUpPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (validateForm()) signUp(formData);
+    if (validateForm()) {
+      signUp(formData);
+      navigate("/")
+    }
   };
 
   const inputFields = [
